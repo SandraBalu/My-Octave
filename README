@@ -1,96 +1,30 @@
-	To solve this problem we create an array of matrices where we
-save the matrices read from the keyboard using dynamic memory allocation. In
-order to be able to retain the dimensions of each matrix, we will also create 
-a two-dimensional vector with 2 columns and the number of lines equal to the 
-number of matrices that have been read from the keyboard. In this vector, the
-first column on line X contains the number of lines and the second column
-contains the number of columns of the matrix of order X in the read list. We 
-read from the key-board one command at a time until the Q command appears and,
-depending on the read operation, we use specific functions to be able to 
-accomplish the tasks required by each command.
- 
-	For the L command we have to read and add a new matrix to the list of
-matrices which is already saved in the memory. To perform this operation, we 
-use a function that reallocates the memory already allocated for the array of
-matrices and the two-dimensional vector with dimensions. We then allocate 
-memory on the last position in the array for the new matrix and add it, doing
-the same for its dimensions. At the end, we increase the variable that counts 
-the number of matrices in the list.
- 
-	For the F command we use a function that reads the index of the matrix
-that we want to remove from the list and then frees the memory allocated to
-store this matrix and its dimensions. After the memory is freed, we move all 
-the matrices and their dimensions from position index + 1 to the end, with one
-position to the left.
- 
-	For the D command we use a function that reads the index of the matrix
- whose dimensions we want to display and, with the help of the two-dimensional
- vector with dimensions, it displays the columns of the index line.
- 
-	For the P command we use a function that reads the index of the array 
-we want to display. Using the array of matrices and the dimensions matrix, we
-display the elements of the desired matrix.
- 
-	For the C command we use a function that reads the index of the matrix
-we want to resize.  Then, we read the number of lines we want to keep in the 
-matrix and, with the help of a dynamically allocated array, we save the indices
-of these lines read from the array. We do the same for the columns and their
-indices. Then, if the matrix with the given index exists in the list, we will
-dynamically allocate a new matrix with the dimensions of the resized matrix 
-where we save the elements of the original matrix in the order of the indexes
-given from the keyboard (thus saving the new rows and columns with all
-permutations). Finally, we free the memory of the original matrix from the 
-array and add the resized matrix in its place.
- 
-	For the M command we use a function that reads 2 indices and checks if
-the matrices with the given indices exist and if they can be multiplied. If so,
-we dynamically allocate a new matrix that holds the result returned by a 
-function that multiplies 2 matrices. We reallocate memory for the array of
-matrices and for the 2-dimensional vector, allocate memory for the new elements
-and then add them.
- 
- 	For the O command we use a function that arranges the matrices in 
-ascending order by the sum of each matrix elements % 10007 using pointer
-interchange for matrices  and static interchange for dimensions.
- 
-	For the T command we use a function that reads the index of an index
-matrix and, if it exists in our list, the command modifies it by saving its 
-transpose instead. The function dynamically allocates the memory corresponding
-to the transpose and builds a matrix in which it saves the lines of the
-original matrix on each column. Then, it frees the memory allocated to the 
-original matrix and in its place, it adds the previously constructed matrix.
- 
-	For the R command we use a function that reads the index of an array
-and the power we want to raise the array to. We call a function that checks if
-the matrix with the given index exists in the list that has already been saved
-in memory and if it is quadratic. If so, the function adds the matrix raised to
-the power instead of the original matrix. For the addition, the function 
-constructs a new matrix which saves the matrix returned by a matrix raising to
-power function in logarithmic time, and saves it replacing the original matrix.
-The called function that scales the matrix to power is based on the following
-principle: A^n =
-1) 1 , n = 0
-2) A * A^(n-1) , n - odd
-3) (A^(n/2))^2 , n - even
-These operations will be performed using a function that multiplies 2 quadratic
-matrices of the same size.
- 
- 	For the S command we use a function that reads 2 indices and multiplies
- the matrices withe the given indices using Strassen's algorithm. Strassen's 
-algorithm for matrix multiplication is based on Divide and Conquer method, 
-being implemented through a recursive function.We thus call a function that
-adds the resulting matrix from the multiplication algorithm to the end of the
-matrix array. The output matrix is calculated using a recursive function that 
-divides each of the 2 matrices involved in the multiplication into 4 quadrants.
-The resulting 8 quadrants are saved in new matrices and are used to perform 
-additions or subtractions according to the algorithm formulas. Then they are 
-used to create 4 new quadrants that are part of the final matrix returned by
-the function. The function auto-appends until the size of each matrix in the
-multiplication becomes 1. The function only runs examples with matrices of size
-2^n, so the algorithm will be performed successfully
- 
-	For the Q command we completely free the memory taken up by the array
-of matrices and the two-dimensional matrix of dimensions. This command will be executed when exiting the loop that allows reading new commands.
- 
-	If the operation read from the keyboard does not match any of these 
-commands, ignore the command and display an appropriate message.
+
+# My octave
+
+## General description
+
+	The problem is addressed by creating an array of matrices, utilizing dynamic memory allocation to store matrices inputted from the keyboard. To retain matrix dimensions, a two-dimensional vector is established with 2 columns and a number of lines equivalent to the matrices read. The first column on line X denotes the number of lines, while the second column contains the number of columns for the Xth matrix in the read list. Keyboard commands are processed one at a time until the "Q" command appears. Specific functions are employed based on the command to accomplish the required tasks.
+
+## Commands
+
+	For the "L" command, a new matrix is read and added to the existing list. Memory allocation is adjusted, and the new matrix is added along with its dimensions. The count of matrices in the list is then incremented.
+
+	The "F" command involves removing a matrix from the list, and a function is used to free the allocated memory for the specified matrix and its dimensions. Subsequently, matrices and dimensions from the position following the specified index to the end are shifted one position to the left.
+
+	The "D" command, when invoked, displays the columns of a matrix specified by its index, using the two-dimensional vector with dimensions.
+
+	The "P" command is executed by a function that reads the index of the array to display. Elements of the desired matrix are displayed using the array of matrices and the dimensions matrix.
+
+	For the "C" command, the function reads the index of the matrix to resize. It further reads the desired number of lines and columns, saving their indices in dynamically allocated arrays. If the matrix exists in the list, a new matrix with resized dimensions is dynamically allocated, and elements of the original matrix are reordered according to the specified indices. The original matrix's memory is then freed, and the resized matrix is added in its place.
+
+	The "M" command involves reading two indices, checking matrix existence and compatibility for multiplication. A new matrix is dynamically allocated to hold the multiplication result, and memory is reallocated for the array of matrices and the two-dimensional vector.
+
+	The "O" command arranges matrices in ascending order based on the sum of elements % 10007, using pointer interchange for matrices and static interchange for dimensions.
+
+	The "T" command reads the index of a matrix and, if it exists, modifies it to store its transpose. Memory is dynamically allocated for the transpose, and the original matrix's memory is freed.
+
+	For the "R" command, the index of an array and the desired power are read. A function checks for matrix existence and quadratic nature. If met, a new matrix raised to the power is constructed, replacing the original matrix. The matrix raising to power function operates in logarithmic time.
+
+	The "S" command reads two indices and multiplies matrices using Strassen's algorithm, a recursive function employing the Divide and Conquer method. The resulting matrix is added to the end of the matrix array.
+
+	Upon the "Q" command, all memory occupied by the array of matrices and the two-dimensional matrix of dimensions is freed. If the keyboard input does not match any command, the system ignores the input and displays an appropriate message.
